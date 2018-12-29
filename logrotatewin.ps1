@@ -13,7 +13,7 @@ $CompressBefore = (Get-Date -Date $CurrentDate).AddDays( - $KeepRaw)
 
 # Datestamp the current log files and move them to the archive location
 Get-ChildItem -Path $logFiles -Filter * |Where-Object {$_.LastWriteTime -lt $CompressBefore} |  ForEach-Object {
-	$newName = "$($_.DirectoryName)\$(Get-Date -Format yyyy-MM-dd)-$($_.BaseName)$($_.Extension)"
+	$newName = "$($_.DirectoryName)\$(Get-Date -Format dd-MM-yyyy)-$($_.BaseName)$($_.Extension)"
 	Rename-Item -Path $_.FullName -NewName $newName
 	Move-Item -Path $newName -Destination $logArchive
 	}
